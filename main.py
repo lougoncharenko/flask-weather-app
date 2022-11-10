@@ -12,4 +12,18 @@ app = Flask(__name__)
 load_dotenv()
 api_key = os.getenv('API_KEY')
 
+@app.route('/')
+def home_page():
+    """
+    Displays the homepage with forms for weather data.
+    """
+    context = {
+        'min_date': (datetime.now() - timedelta(days=5)),
+        'max_date': datetime.now()
+    }
+    return render_template('home.html', **context)
 
+
+if __name__ == '__main__':
+    app.config['ENV'] = 'development'
+    app.run(debug=True)
