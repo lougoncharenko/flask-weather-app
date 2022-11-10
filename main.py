@@ -23,6 +23,15 @@ def home_page():
     }
     return render_template('home.html', **context)
 
+@app.route('/results')
+def weather_results():
+    """Displays results for current weather conditions."""
+    city = request.args.get('city')
+    unit = request.args.get('units')
+
+    response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
+
+
 
 if __name__ == '__main__':
     app.config['ENV'] = 'development'
