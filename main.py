@@ -47,7 +47,9 @@ def weather_results():
     'sunrise': data.sys.sunrise,
     'sunset': data.sys.sunset,
     'units_letter': get_letter_for_units(units)
-}
+    }
+
+    return render_template('results.html', **context)
 
 
 if __name__ == '__main__':
