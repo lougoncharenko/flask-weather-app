@@ -23,6 +23,10 @@ def home_page():
     }
     return render_template('home.html', **context)
 
+def get_letter_for_units(units):
+    """Returns a shorthand letter for the given units."""
+    return 'F' if units == 'imperial' else 'C' if units == 'metric' else 'K'
+
 @app.route('/results')
 def weather_results():
     """Displays results for current weather conditions."""
@@ -30,8 +34,20 @@ def weather_results():
     unit = request.args.get('units')
 
     response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
-    results = response.json()
+    data = response.json()
     # print(results) 
+
+    context = {
+    'date': datetime.now(),
+    'city': data.name,
+    'description': data.weather[0].description,
+    'temp': data.main.temp,
+    'humidity': data.main.humidity,
+    'wind_speed': data.wind.speed,
+    'sunrise': data.sys.sunrise,
+    'sunset': data.sys.sunset,
+    'units_letter': get_letter_for_units(units)
+}
 
 
 if __name__ == '__main__':
