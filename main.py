@@ -30,7 +30,8 @@ def weather_results():
     unit = request.args.get('units')
 
     response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
-
+    results = response.json()
+    # print(results) 
 
 
 if __name__ == '__main__':
