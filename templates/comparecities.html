@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 
 
-{% block content %}
+{% block content %}                 
 <section class="weather-form">
-    <h2>What's the weather like today?</h1>
-
-    <form action="/results" method="GET">
+    <form action="comparison_results" method="GET">
+        <h2>Compare Two Cities</h1>
         <fieldset>
             <legend>Please enter your information:</legend>
 
             <p>
                 <label>
-                    Please enter your city: <br>
-                    <input type="text" name="city">
+                    Please enter the first city: <br>
+                    <input type="text" name="city1">
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    Please enter the second city: <br>
+                    <input type="text" name="city2">
                 </label>
             </p>
 
@@ -31,16 +37,7 @@
             <p>
                 <input type="submit" value="Submit">
             </p>
-
         </fieldset>
     </form>
 </section>
-<br>
-
-<div>
-    <a href="http://127.0.0.1:3000/comaprecities" >
-         <button>Compare Two Cities</button>
-    </a>
-</div>
-
 {% endblock content %}

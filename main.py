@@ -27,6 +27,23 @@ def get_letter_for_units(units):
     """Returns a shorthand letter for the given units."""
     return 'F' if units == 'imperial' else 'C' if units == 'metric' else 'K'
 
+
+@app.route('/comaprecities')
+def compare_cities():
+    """
+    Displays form for comparing weather data for two cities.
+    """
+    context = {
+        'min_date': (datetime.now() - timedelta(days=5)),
+        'max_date': datetime.now()
+    }
+    return render_template('comparecities.html', **context)
+
+def get_letter_for_units(units):
+    """Returns a shorthand letter for the given units."""
+    return 'F' if units == 'imperial' else 'C' if units == 'metric' else 'K'
+
+
 @app.route('/results')
 def weather_results():
     """Displays results for current weather conditions."""
