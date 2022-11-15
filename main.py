@@ -60,7 +60,8 @@ def weather_results():
     'wind_speed': data,
     'sunrise': data,
     'sunset': data,
-    'units_letter': get_letter_for_units(unit)
+    'units_letter': get_letter_for_units(unit),
+    'icon': data
     }
 
     return render_template('weatherresults.html', **context)
