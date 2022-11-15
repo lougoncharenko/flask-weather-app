@@ -4,10 +4,7 @@ import json
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, send_file
-
 app = Flask(__name__)
-
-
 # Get the API key from the '.env' file
 load_dotenv()
 api_key = os.getenv('API_KEY')
@@ -49,10 +46,8 @@ def weather_results():
     """Displays results for current weather conditions."""
     city = request.args.get('city')
     unit = request.args.get('units')
-
     response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
     data = response.json()
-    
     date_obj = datetime.now()
     todays_date = date_obj.strftime('%m / %d / %Y')
 
@@ -81,13 +76,6 @@ def comparison_results():
     date_obj = datetime.now()
     todays_date = date_obj.strftime('%m / %d / %Y')
 
-    # TODO: Make 2 API calls, one for each city. HINT: You may want to write a 
-    # helper function for this!
-
-    # TODO: Pass the information for both cities in the context. Make sure to
-    # pass info for the temperature, humidity, wind speed, and sunset time!
-    # HINT: It may be useful to create 2 new dictionaries, `city1_info` and 
-    # `city2_info`, to organize the data.
     context = {
     'date': todays_date,
     'city1': city_1_Data,
@@ -106,7 +94,7 @@ def comparison_results():
     'sunset_city2': city_2_Data,
     'units_letter': get_letter_for_units(units)
     }
-    return render_template('comparison_results.html', **context)
+    return render_template('citiesresults.html', **context)
 
 def getCityInformation(city, unit):
     """
@@ -115,8 +103,6 @@ def getCityInformation(city, unit):
     response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
     data = response.json()
     return data
-
-
 
 if __name__ == '__main__':
     app.config['ENV'] = 'development'

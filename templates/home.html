@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
 <section class="weather-form">
     <h2>What's the weather like today?</h1>
@@ -8,14 +6,12 @@
     <form action="/results" method="GET">
         <fieldset>
             <legend>Please enter your information:</legend>
-
             <p>
                 <label>
                     Please enter your city: <br>
                     <input type="text" name="city">
                 </label>
             </p>
-
             <p>
                 Please choose your desired units: <br>
                 <label>
@@ -27,20 +23,16 @@
                     Fahrenheit
                 </label><br>
             </p>
-
             <p>
                 <input type="submit" value="Submit">
             </p>
-
         </fieldset>
     </form>
 </section>
 <br>
-
 <div>
     <a href="http://127.0.0.1:3000/comaprecities" >
          <button>Compare Two Cities</button>
     </a>
 </div>
-
 {% endblock content %}

@@ -1,27 +1,22 @@
 {% extends 'base.html' %}
-
-
 {% block content %}                 
 <section class="weather-form">
     <form action="comparison_results" method="GET">
         <h2>Compare Two Cities</h1>
         <fieldset>
             <legend>Please enter your information:</legend>
-
             <p>
                 <label>
                     Please enter the first city: <br>
                     <input type="text" name="city1">
                 </label>
             </p>
-
             <p>
                 <label>
                     Please enter the second city: <br>
                     <input type="text" name="city2">
                 </label>
             </p>
-
             <p>
                 Please choose your desired units: <br>
                 <label>
@@ -33,7 +28,6 @@
                     Fahrenheit
                 </label><br>
             </p>
-
             <p>
                 <input type="submit" value="Submit">
             </p>

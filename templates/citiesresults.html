@@ -2,34 +2,54 @@
 {% block content %}
 
 <section class="weather-form">
-    {# 
-        TODO: Replace the hard-coded cities and date below with data from the 
-        server.
-    #}
-    <h1>Weather in [CITY1] and [CITY2]</h1>
-    <p>[TODAYS_DATE]</p>
-
+    <h1>Weather in {{city1.name}} and {{city2.name}}</h1>
+    <p>{{date}}</p>
 
     {#
         TODO: Add the temperature, description, and min & max temperature below.
         Replace 'F' with the appropriate units.
     #}
-    <p>
-        It is [NUM_DEGREES] [UNITS] [WARMER/COLDER] in [CITY1] than in [CITY2] today.
-    </p>
+        <div id ="descriptions">
+            <p> It is {{description_city1.weather[0].description}} in {{city1.name}}</p>
+            <p> It is {{description_city2.weather[0].description}} in {{city2.name}}</p>
+        </div>
 
-    <p>
-        The humidity in [CITY1] is [AMOUNT] [GREATER/LESS] than in [CITY2].
-    </p>
-
-    <p>
-        The wind speed in [CITY1] is [AMOUNT] [GREATER/LESS] than in [CITY2].
-    </p>
-
-    <p>
-        The sun sets in [CITY1] [HOURS] hours [EARLIER/LATER] than in [CITY2].
-    </p>
-    
+        <div id = 'temperature_difference'>
+            {% if temp_city1.main.temp > temp_city2.main.temp%}
+                <p> It is {{temp_city1.main.temp - temp_city2.main.temp}} {{units_letter}} warmer in {{city1.name}} than in {{city2.name}} today.</p>
+            {% elif temp_city2.main.temp > temp_city1.main.temp %}
+                <p> It is {{round(temp_city2.main.temp - temp_city1.main.temp, 2)}} {{units_letter}} warmer in {{city2.name}} than in {{city1.name}} today.</p>
+            {% else %} 
+            <p>Temperatures are the same in {{city1.name}} and {{city2.name}} </p>
+            {% endif %} 
+        </div>
+        <div id = 'humidity_difference'>
+            {% if humidity_city1.main.humidity > humidity_city2.main.humidity%}
+                <p> The humidity in {{city1.name}} is {{humidity_city1.main.humidity - humidity_city2.main.humidity}}%  higher than {{city2.name}} today.</p>
+            {% elif humidity_city2.main.humidity > humidity_city1.main.humidity%}
+                <p> The humidity in {{city2.name}} is {{humidity_city2.main.humidity - humidity_city1.main.humidity}}%  higher than {{city1.name}} today.</p>
+            {% else %} 
+            <p>Humidity is the same in {{city1.name}} and {{city2.name}} </p>
+            {% endif %} 
+        </div>
+        <div id = 'wind_difference'>
+            {% if wind_speed_city1.wind.speed > wind_speed_city2.wind.speed %}
+                <p>  The wind speed in {{city1.name}} is {{wind_speed_city1.wind.speed - wind_speed_city2.wind.speed}} miles/hour greater than {{city2.name}}</p>
+            {% elif wind_speed_city2.wind.speed > wind_speed_city1.wind.speed %}
+                <p> The wind speed in {{city2.name}} is {{wind_speed_city2.wind.speed - wind_speed_city1.wind.speed}} miles/hour greater than {{city1.name}} </p>
+            {% else %} 
+                <p>Wind speed is the same in {{city1.name}} and {{city2.name}} </p>
+            {% endif %} 
+        </div>
+        <div id = 'sunset_difference'>
+            {% if sunset_city1.sys.sunset > sunset_city2.sys.sunset %}
+                <p> The sun sets in {{city1.name}} {{sunset_city1.sys.sunset - sunset_city2.sys.sunset}} hours earlier than in {{city2.name}}.  </p>
+            {% elif sunset_city2.sys.sunset > sunset_city1.sys.sunset%}
+                <p>The sun sets in {{city2.name}} {{sunset_city2.sys.sunset - sunset_city1.sys.sunset}} hours earlier than in {{city1.name}}. </p>
+            {% else %} 
+                <p>Sun sets around the same time in both cities </p>
+            {% endif %} 
+        </div> 
 </section>
 
 {% endblock %}
