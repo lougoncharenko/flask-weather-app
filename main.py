@@ -58,6 +58,7 @@ def weather_results():
     'temp': data,
     'humidity': data,
     'wind_speed': data,
+    "feels_like": data,
     'sunrise': data,
     'sunset': data,
     'units_letter': get_letter_for_units(unit),

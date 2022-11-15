@@ -6,15 +6,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
     </head>
     <body>
-        <main>
-            <h1><a href="/">Weather App</a></h1>
-            {% block content %}
-            {% endblock %}  
+        <main> 
+            <h1 id="weather-app"><a href="/">Weather App  </a></h1>
+            <section id ='container'>
+                {% block content %}
+                {% endblock %}  
+            </section>
         </main>
-        <footer>
-            <p>
-                This Weather App was developed by Louisa Goncharenko © 2022.
-            </p>
-        </footer>
     </body>
 </html>
