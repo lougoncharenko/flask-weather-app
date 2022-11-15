@@ -55,7 +55,6 @@ def weather_results():
     
     date_obj = datetime.now()
     todays_date = date_obj.strftime('%m / %d / %Y')
-    
 
     context = {
     'date': todays_date,
@@ -70,6 +69,53 @@ def weather_results():
     }
 
     return render_template('weatherresults.html', **context)
+
+@app.route('/comparison_results')
+def comparison_results():
+    """Displays the relative weather for 2 different cities."""
+    city_1 = request.args.get('city1')
+    city_2 = request.args.get('city2')
+    units = request.args.get('units')
+    city_1_Data = getCityInformation(city_1, units)
+    city_2_Data = getCityInformation(city_2, units)
+    date_obj = datetime.now()
+    todays_date = date_obj.strftime('%m / %d / %Y')
+
+    # TODO: Make 2 API calls, one for each city. HINT: You may want to write a 
+    # helper function for this!
+
+    # TODO: Pass the information for both cities in the context. Make sure to
+    # pass info for the temperature, humidity, wind speed, and sunset time!
+    # HINT: It may be useful to create 2 new dictionaries, `city1_info` and 
+    # `city2_info`, to organize the data.
+    context = {
+    'date': todays_date,
+    'city1': city_1_Data,
+    'description_city1': city_1_Data,
+    'temp_city1': city_1_Data,
+    'humidity_city1': city_1_Data,
+    'wind_speed_city1': city_1_Data,
+    'sunrise_city1': city_1_Data,
+    'sunset_city1': city_1_Data,
+    'city2': city_2_Data,
+    'description_city2': city_2_Data,
+    'temp_city2': city_2_Data,
+    'humidity_city2': city_2_Data,
+    'wind_speed_city2': city_2_Data,
+    'sunrise_city2': city_2_Data,
+    'sunset_city2': city_2_Data,
+    'units_letter': get_letter_for_units(units)
+    }
+    return render_template('comparison_results.html', **context)
+
+def getCityInformation(city, unit):
+    """
+    Helper function that makes an API call for each city passed in as a parameter
+    """
+    response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
+    data = response.json()
+    return data
+
 
 
 if __name__ == '__main__':
