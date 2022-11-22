@@ -74,18 +74,8 @@ h1 a {
     justify-content: space-evenly;
   }
 
-  /* .temp {
-    font-size: 8em;
-    text-align: left;
+  #compare-button {
+    background-color: yellow;
+    padding: 20px;
+    font-size: 20px;;
   }
-  
-  .weatherCondition {
-    font-size: 1.5em;
-  }
-
-  .deg {
-    font-size: 2rem;
-    position: absolute;
-    top: 2%;
-    left: 17%;
-  }  */

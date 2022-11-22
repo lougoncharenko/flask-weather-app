@@ -14,10 +14,33 @@ def home_page():
     """
     Displays the homepage with forms for weather data.
     """
+    city = request.args.get('city')
+    unit = request.args.get('units')
+    if not city:
+        city = 'Sarasota'
+    if not unit:
+        unit = 'metric'
+    response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
+    data = response.json()
+    date_obj = datetime.now()
+    todays_date = date_obj.strftime('%m / %d / %Y')
+
     context = {
-        'min_date': (datetime.now() - timedelta(days=5)),
-        'max_date': datetime.now()
+    'min_date': (datetime.now() - timedelta(days=5)),
+    'max_date': datetime.now(),
+    'date': todays_date,
+    'city': data,
+    'description': data,
+    'temp': data,
+    'humidity': data,
+    'wind_speed': data,
+    "feels_like": data,
+    'sunrise': data,
+    'sunset': data,
+    'units_letter': get_letter_for_units(unit),
+    'icon': data
     }
+   
     return render_template('home.html', **context)
 
 def get_letter_for_units(units):
@@ -40,32 +63,6 @@ def get_letter_for_units(units):
     """Returns a shorthand letter for the given units."""
     return 'F' if units == 'imperial' else 'C' if units == 'metric' else 'K'
 
-
-@app.route('/results')
-def weather_results():
-    """Displays results for current weather conditions."""
-    city = request.args.get('city')
-    unit = request.args.get('units')
-    response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&units={unit}&appid={api_key}")
-    data = response.json()
-    date_obj = datetime.now()
-    todays_date = date_obj.strftime('%m / %d / %Y')
-
-    context = {
-    'date': todays_date,
-    'city': data,
-    'description': data,
-    'temp': data,
-    'humidity': data,
-    'wind_speed': data,
-    "feels_like": data,
-    'sunrise': data,
-    'sunset': data,
-    'units_letter': get_letter_for_units(unit),
-    'icon': data
-    }
-
-    return render_template('weatherresults.html', **context)
 
 @app.route('/comparison_results')
 def comparison_results():
