@@ -40,31 +40,29 @@
     <section class="weatherInfo">
         <div class="cardTop">
           <span class="weatherCondition"></span>
-          <h1 class="city"> {{city.name}} on {{date}} </h1>
-          <h3>{{description.weather[0].description}}</h3>
+          <h1 class="city"> {{city1.name}} on {{date}} </h1>
+          <h3>{{city1.weather[0].description}}</h3>
         </div>
         <div id = "bottom-cards">
             <div class="cardLeft">
                 <span class="temp">
-                  <p>{{temp.main.temp}} {{units_letter}}</p>
+                  <p>{{city1.main.temp}} {{units_letter}}</p>
                   </span> 
-                <image src="http://openweathermap.org/img/wn/{{icon.weather[0].icon}}@2x.png"></image>
+                <image src="http://openweathermap.org/img/wn/{{city1.weather[0].icon}}@2x.png"></image>
               </div>
               <div class ="border"> </div>
               <div class="cardRight">
                   <span class="feelsLike">
-                      <p>Feels Like: {{feels_like.main.feels_like}}</p>
+                      <p>Feels Like: {{city1.main.feels_like}} {{units_letter}}</p>
                   </span>
                   <span class="tempMax">
-                      <p>wind_speed: {{wind_speed.wind.speed}} miles/hour</p>
+                      <p>wind_speed: {{city1.wind.speed}} miles/hour</p>
                   </span>
                   <span class="humidty">
-                      <p>Humidty: {{humidity.main.humidity}}</p>
+                      <p>Humidty: {{city1.main.humidity}} %</p>
                   </span>
                 </div>
-    
         </div>
-       
     </section>
 </div>
 {% endblock content %}

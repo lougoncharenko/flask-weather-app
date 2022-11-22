@@ -1,55 +1,98 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="weather-form">
-    <h1>Weather in {{city1.name}} and {{city2.name}}</h1>
-    <p>{{date}}</p>
-
-    {#
-        TODO: Add the temperature, description, and min & max temperature below.
-        Replace 'F' with the appropriate units.
-    #}
-        <div id ="descriptions">
-            <p> It is {{description_city1.weather[0].description}} in {{city1.name}}</p>
-            <p> It is {{description_city2.weather[0].description}} in {{city2.name}}</p>
+<section id="weather-cards">
+    <section class="weatherInfo">
+        <div class="cardTop">
+          <span class="weatherCondition"></span>
+          <h1 class="city"> {{city1.name}} on {{date}} </h1>
+          <h3>{{city1.weather[0].description}}</h3>
         </div>
+        <div id = "bottom-cards">
+            <div class="cardLeft">
+                <span class="temp">
+                  <p>{{city1.main.temp}} {{units_letter}}</p>
+                  </span> 
+                <image src="http://openweathermap.org/img/wn/{{city1.weather[0].icon}}@2x.png"></image>
+              </div>
+              <div class ="border"> </div>
+              <div class="cardRight">
+                  <span class="feelsLike">
+                      <p>Feels Like: {{city1.main.feels_like}} {{units_letter}}</p>
+                  </span>
+                  <span class="tempMax">
+                      <p>wind_speed: {{city1.wind.speed}} miles/hour</p>
+                  </span>
+                  <span class="humidty">
+                      <p>Humidty: {{city1.main.humidity}}%</p>
+                  </span>
+                </div>
+        </div>
+    </section>
 
+    <section class="weatherInfo">
+        <div class="cardTop">
+          <span class="weatherCondition"></span>
+          <h1 class="city"> {{city2.name}} on {{date}} </h1>
+          <h3>{{city2.weather[0].description}}</h3>
+        </div>
+        <div id = "bottom-cards">
+            <div class="cardLeft">
+                <span class="temp">
+                  <p>{{city2.main.temp}} {{units_letter}}</p>
+                  </span> 
+                <image src="http://openweathermap.org/img/wn/{{city2.weather[0].icon}}@2x.png"></image>
+              </div>
+              <div class ="border"> </div>
+              <div class="cardRight">
+                  <span class="feelsLike">
+                      <p>Feels Like: {{city2.main.feels_like}} {{units_letter}}</p>
+                  </span>
+                  <span class="tempMax">
+                      <p>wind_speed: {{city2.wind.speed}} miles/hour</p>
+                  </span>
+                  <span class="humidty">
+                      <p>Humidty: {{city2.main.humidity}}%</p>
+                  </span>
+                </div>
+        </div>
+    </section>
+</section>
+
+<section class="weather-form">
+    <h1>Comparing weather in {{city1.name}} and {{city2.name}}</h1>
+    <p>{{date}}</p>
+        <div id ="descriptions">
+            <p> It is {{city1.weather[0].description}} in {{city1.name}}</p>
+            <p> It is {{city2.weather[0].description}} in {{city2.name}}</p>
+        </div>
         <div id = 'temperature_difference'>
-            {% if temp_city1.main.temp > temp_city2.main.temp%}
-                <p> It is {{temp_city1.main.temp - temp_city2.main.temp}} {{units_letter}} warmer in {{city1.name}} than in {{city2.name}} today.</p>
-            {% elif temp_city2.main.temp > temp_city1.main.temp %}
-                <p> It is {{round(temp_city2.main.temp - temp_city1.main.temp, 2)}} {{units_letter}} warmer in {{city2.name}} than in {{city1.name}} today.</p>
+            {% if city1.main.temp > city2.main.temp%}
+                <p> It is {{city1.main.temp - city2.main.temp}} {{units_letter}} warmer in {{city1.name}} than in {{city2.name}} today.</p>
+            {% elif city2.main.temp > city1.main.temp %}
+                <p> It is {{round(city2.main.temp - city1.main.temp, 2)}} {{units_letter}} warmer in {{city2.name}} than in {{city1.name}} today.</p>
             {% else %} 
             <p>Temperatures are the same in {{city1.name}} and {{city2.name}} </p>
             {% endif %} 
         </div>
         <div id = 'humidity_difference'>
-            {% if humidity_city1.main.humidity > humidity_city2.main.humidity%}
-                <p> The humidity in {{city1.name}} is {{humidity_city1.main.humidity - humidity_city2.main.humidity}}%  higher than {{city2.name}} today.</p>
-            {% elif humidity_city2.main.humidity > humidity_city1.main.humidity%}
-                <p> The humidity in {{city2.name}} is {{humidity_city2.main.humidity - humidity_city1.main.humidity}}%  higher than {{city1.name}} today.</p>
+            {% if city1.main.humidity > city2.main.humidity%}
+                <p> The humidity in {{city1.name}} is {{city1.main.humidity - city2.main.humidity}}%  higher than {{city2.name}} today.</p>
+            {% elif city2.main.humidity > city1.main.humidity%}
+                <p> The humidity in {{city2.name}} is {{city2.main.humidity - city1.main.humidity}}%  higher than {{city1.name}} today.</p>
             {% else %} 
             <p>Humidity is the same in {{city1.name}} and {{city2.name}} </p>
             {% endif %} 
         </div>
         <div id = 'wind_difference'>
-            {% if wind_speed_city1.wind.speed > wind_speed_city2.wind.speed %}
-                <p>  The wind speed in {{city1.name}} is {{wind_speed_city1.wind.speed - wind_speed_city2.wind.speed}} miles/hour greater than {{city2.name}}</p>
-            {% elif wind_speed_city2.wind.speed > wind_speed_city1.wind.speed %}
-                <p> The wind speed in {{city2.name}} is {{wind_speed_city2.wind.speed - wind_speed_city1.wind.speed}} miles/hour greater than {{city1.name}} </p>
+            {% if city1.wind.speed > city2.wind.speed %}
+                <p>  The wind speed in {{city1.name}} is {{city1.wind.speed - city2.wind.speed}} miles/hour greater than {{city2.name}}</p>
+            {% elif city2.wind.speed > city1.wind.speed %}
+                <p> The wind speed in {{city2.name}} is {{city2.wind.speed - city1.wind.speed}} miles/hour greater than {{city1.name}} </p>
             {% else %} 
                 <p>Wind speed is the same in {{city1.name}} and {{city2.name}} </p>
             {% endif %} 
         </div>
-        <div id = 'sunset_difference'>
-            {% if sunset_city1.sys.sunset > sunset_city2.sys.sunset %}
-                <p> The sun sets in {{city1.name}} {{sunset_city1.sys.sunset - sunset_city2.sys.sunset}} hours earlier than in {{city2.name}}.  </p>
-            {% elif sunset_city2.sys.sunset > sunset_city1.sys.sunset%}
-                <p>The sun sets in {{city2.name}} {{sunset_city2.sys.sunset - sunset_city1.sys.sunset}} hours earlier than in {{city1.name}}. </p>
-            {% else %} 
-                <p>Sun sets around the same time in both cities </p>
-            {% endif %} 
-        </div> 
 </section>
 
 {% endblock %}

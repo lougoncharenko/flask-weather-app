@@ -29,16 +29,8 @@ def home_page():
     'min_date': (datetime.now() - timedelta(days=5)),
     'max_date': datetime.now(),
     'date': todays_date,
-    'city': data,
-    'description': data,
-    'temp': data,
-    'humidity': data,
-    'wind_speed': data,
-    "feels_like": data,
-    'sunrise': data,
-    'sunset': data,
+    'city1': data,
     'units_letter': get_letter_for_units(unit),
-    'icon': data
     }
    
     return render_template('home.html', **context)
@@ -78,19 +70,7 @@ def comparison_results():
     context = {
     'date': todays_date,
     'city1': city_1_Data,
-    'description_city1': city_1_Data,
-    'temp_city1': city_1_Data,
-    'humidity_city1': city_1_Data,
-    'wind_speed_city1': city_1_Data,
-    'sunrise_city1': city_1_Data,
-    'sunset_city1': city_1_Data,
     'city2': city_2_Data,
-    'description_city2': city_2_Data,
-    'temp_city2': city_2_Data,
-    'humidity_city2': city_2_Data,
-    'wind_speed_city2': city_2_Data,
-    'sunrise_city2': city_2_Data,
-    'sunset_city2': city_2_Data,
     'units_letter': get_letter_for_units(units)
     }
     return render_template('citiesresults.html', **context)
