@@ -22,3 +22,22 @@
   - API requests 
   - Virtual Enviroments
 - [OpenWeather API](https://openweathermap.org/api)
+
+<div align="center">
+
+## Weather App Preview:
+<img src='screenshot.png'>
+
+</div>
+
+## Features:
+- Ability to search for weather based on location
+- Choose either Celsius or Fahrenheit for temperature
+- Compare the weather data of two locations
+- Validation if city does not exist
+
+## Improvements
+- Adding a three-day, five-day, or seven-day forecast option
+- Adding rain predictions (chances of rain)
+- Adding a feature that displays time Of Sunrise And Sunset and Humidity And Visibility.
+- integrating a weather radar that shows live weather into the terminal
